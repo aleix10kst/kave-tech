@@ -8,13 +8,13 @@ import { MouseEvent } from "react";
 
 export interface ProductCardProps {
   product: Product;
-  onClickFav: () => void;
+  onClickFav: (productSku: string) => void;
 }
 
 const ProductCard = ({ product, onClickFav }: ProductCardProps) => {
   const favButtonClicked = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    onClickFav();
+    onClickFav(product.productSku);
   };
 
   return (
