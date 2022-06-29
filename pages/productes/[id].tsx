@@ -5,6 +5,7 @@ import { HeartIcon as OutlineHeartIcon } from "@heroicons/react/outline";
 import { HeartIcon as SolidHeartIcon } from "@heroicons/react/solid";
 import { fetcher } from "@/lib/utils/fetcher";
 import { PRODUCTS_API } from "@/lib/constants/api-route";
+import { useFavoriteProducts } from "@/lib/hooks/useFavoriteProducts";
 
 interface ProductDetailPageProps {
   product: Product;
@@ -13,11 +14,12 @@ interface ProductDetailPageProps {
 export const ProductDetailPage: NextPage<ProductDetailPageProps> = ({
   product,
 }) => {
+  const [favorites, toggleFavorite] = useFavoriteProducts();
   const productCollectionName = product.productCollection
     .slice(0, 1)
     .toUpperCase()
     .concat(product.productCollection.slice(1));
-  const isFavorite = true;
+  const isFavorite = favorites.includes(product.productSku);
   return (
     <div className="flex flex-col lg:flex-row">
       <div className="relative h-[600px] lg:h-screen lg:w-3/5">
@@ -26,7 +28,10 @@ export const ProductDetailPage: NextPage<ProductDetailPageProps> = ({
           layout="fill"
           alt={product.productName}
         />
-        <button className="absolute top-11 right-8" onClick={() => {}}>
+        <button
+          className="absolute top-11 right-8"
+          onClick={() => toggleFavorite(product.productSku)}
+        >
           {isFavorite ? (
             <SolidHeartIcon className="h-7 w-7 text-[#E02020]" />
           ) : (

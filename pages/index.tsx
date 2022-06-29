@@ -8,6 +8,7 @@ import { NextPage } from "next";
 import Link from "next/link";
 import homeBanner from "../public/banner_home.png";
 import Image from "next/image";
+import { useFavoriteProducts } from "@/lib/hooks/useFavoriteProducts";
 
 const CategoriesSection = ({ categories }: { categories: string[] }) => {
   return (
@@ -39,12 +40,17 @@ interface ProductsSectionProps {
 }
 
 const ProductsSection = ({ products }: ProductsSectionProps) => {
+  const [, toggleFavorite] = useFavoriteProducts();
   return (
     <section className="flex flex-col px-5 py-16 md:px-14 lg:py-48 lg:pl-[123px] lg:pr-[112px]">
       <ProductsList
         products={products}
         itemTemplate={(product, index) => (
-          <ProductCard key={index} product={product} onClickFav={() => {}} />
+          <ProductCard
+            key={index}
+            product={product}
+            onClickFav={toggleFavorite}
+          />
         )}
       />
       <Link href={"/productes"}>
