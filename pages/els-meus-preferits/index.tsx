@@ -5,7 +5,7 @@ import { useProducts } from "@/lib/hooks/useProducts";
 import type { NextPage } from "next";
 
 export const MyFavoritesPage: NextPage = () => {
-  const [fetchedProducts] = useProducts();
+  const { products: fetchedProducts } = useProducts();
 
   const products = fetchedProducts.slice();
 
@@ -17,11 +17,7 @@ export const MyFavoritesPage: NextPage = () => {
       <ProductsList
         products={products}
         itemTemplate={(product, index) => (
-          <ProductCard
-            key={index}
-            product={product}
-            onClickFav={() => {}}
-          />
+          <ProductCard key={index} product={product} onClickFav={() => {}} />
         )}
       />
     </GenericPage>

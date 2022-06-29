@@ -26,11 +26,13 @@ const ProductCard = ({ product, onClickFav }: ProductCardProps) => {
     >
       <a className="relative">
         <div className="relative mb-5 h-[267px]">
-          <Image
-            src={product.productImageUrl as string}
-            alt={product.productName}
-            layout="fill"
-          />
+          {product.productImageUrl && (
+            <Image
+              src={product.productImageUrl as string}
+              alt={product.productName}
+              layout="fill"
+            />
+          )}
           <button
             className="absolute right-[18px] top-[18px] lg:right-[22px] lg:top-5"
             onClick={favButtonClicked}

@@ -58,7 +58,7 @@ const ProductsSection = ({ products }: ProductsSectionProps) => {
 
 const Home: NextPage = () => {
   const [categories] = useCategories();
-  const [fetchedProducts] = useProducts();
+  const { products: fetchedProducts = [] } = useProducts();
 
   const products = fetchedProducts.slice(0, 9);
 

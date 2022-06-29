@@ -10,7 +10,7 @@ const PAGE_SIZE = 12;
 
 export const Products: NextPage = () => {
   const [first, setFirst] = useState(0);
-  const [fetchedProducts] = useProducts();
+  const { products: fetchedProducts } = useProducts();
 
   const products = fetchedProducts;
 
@@ -19,11 +19,7 @@ export const Products: NextPage = () => {
       <ProductsList
         products={products}
         itemTemplate={(product, index) => (
-          <ProductCard
-            key={index}
-            product={product}
-            onClickFav={() => {}}
-          />
+          <ProductCard key={index} product={product} onClickFav={() => {}} />
         )}
         paginator={
           <Paginator

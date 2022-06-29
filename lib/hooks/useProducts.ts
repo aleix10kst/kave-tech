@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { Product } from "../types/product.type";
+import useSWR from "swr";
+import { PRODUCTS_API } from "../constants/api-route";
+import { ApiResponse, Product } from "../types/product.type";
+import { fetcher } from "../utils/fetcher";
 
 export const useProducts = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  return [products];
+  const { data, error } = useSWR<ApiResponse>(PRODUCTS_API, fetcher);
+  return { products: data?.results ?? [], error, loading: !data && !error };
 };

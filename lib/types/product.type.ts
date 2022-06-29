@@ -1,3 +1,5 @@
+export type ApiResponse = { results: ProductDto[] };
+
 export interface ProductDto {
   productSku: string;
   productName: string;

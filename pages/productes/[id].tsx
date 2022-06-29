@@ -1,4 +1,4 @@
-import { Product } from "@/lib/types/product.type";
+import { ApiResponse, Product } from "@/lib/types/product.type";
 import { GetServerSideProps, NextPage } from "next";
 import Image from "next/image";
 import { HeartIcon as OutlineHeartIcon } from "@heroicons/react/outline";
@@ -26,10 +26,7 @@ export const ProductDetailPage: NextPage<ProductDetailPageProps> = ({
           layout="fill"
           alt={product.productName}
         />
-        <button
-          className="absolute top-11 right-8"
-          onClick={() => {}}
-        >
+        <button className="absolute top-11 right-8" onClick={() => {}}>
           {isFavorite ? (
             <SolidHeartIcon className="h-7 w-7 text-[#E02020]" />
           ) : (
@@ -55,9 +52,7 @@ export const ProductDetailPage: NextPage<ProductDetailPageProps> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { results: products } = await fetcher<{ results: Product[] }>(
-    PRODUCTS_API
-  );
+  const { results: products } = await fetcher<ApiResponse>(PRODUCTS_API);
   const product = products.find(({ productSku }) => productSku === query.id);
   return { props: { product } };
 };
